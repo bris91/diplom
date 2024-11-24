@@ -1,0 +1,25 @@
+---
+# tasks file for ./nginx_2
+  - name: Установка nginx
+    become: true
+    apt:
+      name: nginx
+      state: latest
+      update_cache: yes
+
+  - name: Подстановка страницы
+    copy:
+      src: "{{ item }}"
+      dest: /var/www/html
+      remote_src: no
+      owner: root
+      group: sudo
+      mode: '0644'
+    with_fileglob:
+      - www/*
+
+  - name: Запуск Nginx
+    service:
+      name: nginx
+      state: started
+      enabled: yes

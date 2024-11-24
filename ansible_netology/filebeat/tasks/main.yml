@@ -1,0 +1,78 @@
+---
+# tasks file for filebeat
+  - name: Установка filebeat
+    become: true
+    apt:
+      deb: "https://mirror.yandex.ru/mirrors/elastic/7/pool/main/f/filebeat/filebeat-7.17.1-amd64.deb"
+
+  - name: Добавление комментария
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/filebeat/filebeat.yml
+      regexp: '^- type: filestream$'
+      line: '#- type: filestream'
+      
+  - name: Добавление комментария
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/filebeat/filebeat.yml
+      regexp: '^  id: my-filestream-id$'
+      line: '# id: my-filestream-id'
+      
+  - name: Добавление комментария
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/filebeat/filebeat.yml
+      regexp: '^    - \/var\/log\/\*\.log$'
+      line: '# - /var/log/*.log'
+      
+  - name: Добавление комментария
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/filebeat/filebeat.yml
+      regexp: '^  enabled: false$'
+      line: '# enabled: false'
+      
+  - name: Добавление комментария
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/filebeat/filebeat.yml
+      regexp: '^  paths:$'
+      line: '# paths:'
+      
+  - name: Изменение хоста в elasticsearch
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/filebeat/filebeat.yml
+      regexp: '^  hosts: \["localhost:9200"\]'
+      line: '  hosts: ["192.168.2.30:9200"]'
+      
+  - name:  Включить модуль nginx
+    become: true
+    ansible.builtin.command: mv /etc/filebeat/modules.d/nginx.yml.disabled /etc/filebeat/modules.d/nginx.yml
+    
+  - name: Изменение хоста в kibana
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/filebeat/filebeat.yml
+      regexp: '^setup\\.kibana'
+      insertafter: '^setup.kibana'
+      line: '  host: "192.168.3.30:5601"'
+      
+  - name: Изменение filebeat inputs
+    become: true
+    ansible.builtin.blockinfile:
+      path: /etc/filebeat/filebeat.yml
+      insertafter: '^filebeat.inputs'
+      block: |
+        - type: log
+          enabled: true
+          paths:
+            - '/var/log/nginx/access.log'
+            - '/var/log/nginx/error.log'
+          
+  - name: Рестарт filebeat и enabled
+    service:
+      name: filebeat
+      state: restarted
+      enabled: yes

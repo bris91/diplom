@@ -1,0 +1,19 @@
+---
+# tasks file for ./z_agent
+  - name: Установка z_agent
+    become: true
+    apt:
+        name: zabbix-agent
+        state: present
+
+  - name: Добавить z_server в z_agent
+    replace:
+      path: "/etc/zabbix/zabbix_agentd.conf"
+      regexp: '^ServerActive=127.0.0.1$'
+      replace: 'ServerActive=192.168.3.20'
+
+  - name: Рестарт z_agent и enabled
+    service:
+      name: zabbix-agent
+      state: restarted
+      enabled: yes
