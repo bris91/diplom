@@ -11,6 +11,7 @@ Kibana-server
 Elasticsearch-server
 Web-server_1
 Web_server_2
+
 ![alt text](https://github.com/bris91/diplom/blob/da859e331743cfdeea3bb7418aaf10a6728139e6/images/vm.png)
 
 Загрузка файла состояния terraform.tfstate в s3
@@ -18,6 +19,7 @@ Web_server_2
 
 Создание сети и подсетей
 ![alt text](https://github.com/bris91/diplom/blob/da859e331743cfdeea3bb7418aaf10a6728139e6/images/network.png)
+
 Создание балансировщика
 ![alt text](https://github.com/bris91/diplom/blob/da859e331743cfdeea3bb7418aaf10a6728139e6/images/alblb.png)
 
@@ -36,7 +38,7 @@ Web_server_2
 Проверка доступности ВМ, используя ansible модуль ping
 ![alt text](https://github.com/bris91/diplom/blob/da859e331743cfdeea3bb7418aaf10a6728139e6/images/ping.png)
 
-Запуск ansible-playbook [Ссылка](https://github.com/bris91/diplom/blob/da859e331743cfdeea3bb7418aaf10a6728139e6/ansible_netology/playbook.yml)
+Запуск ansible-playbook [playbook.yml](https://github.com/bris91/diplom/blob/da859e331743cfdeea3bb7418aaf10a6728139e6/ansible_netology/playbook.yml)
 
 ![alt text](https://github.com/bris91/diplom/blob/da859e331743cfdeea3bb7418aaf10a6728139e6/images/ansible_finish.png)
 
@@ -58,6 +60,6 @@ Web_server_2
 
 ## Логи
 
-Усатновка filebeat и настройка отправки.
+Установка filebeat и настройка отправки.
 
 ![alt text](https://github.com/bris91/diplom/blob/da859e331743cfdeea3bb7418aaf10a6728139e6/images/elasticsearch.png)
