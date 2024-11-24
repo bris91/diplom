@@ -2,7 +2,7 @@
 ## Инфраструктура
 
 Для развёртки инфраструктуры были использованы Terraform и Ansible.
-*Описание инфраструктуры находится в файле terraform/main.tf
+Описание инфраструктуры находится в файле [main.tf](https://github.com/bris91/diplom/blob/48976e36562e6dc17839aafbabada44bfeb9abcb/terraform_netology/main.tf)
 
 Созданы 6 ВМ:
 Bastion
